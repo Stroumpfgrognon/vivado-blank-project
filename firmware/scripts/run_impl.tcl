@@ -8,9 +8,16 @@ proc run_implementation {project_dict entries_dict} {
     if {[catch {current_project} result ]} {
         puts "INFO: Project is not open, opening it with project_name and project_directory project_dict variables"
         # #so try and open it
-        set project_directory [dict get $global_array ""project_root_directory""]
-        set project_name [dict get $global_array "project_name"]
-        set project_path "$project_directory/$project_name/$project_name.xpr"
+        set script_dir [file dirname [ file normalize [info script]]]
+        set script_dir_split [split $script_dir "/"]
+        set script_parent [lindex $script_dir_split end]
+        set path_header "../.."
+        if {$script_parent == "scripts"} {
+            set path_header ".."
+        }
+        set project_name [dict get $project_dict "project_name"]
+        set project_path "$path_header/projects/$project_name/$project_name/$project_name.xpr"
+        puts $project_path
         open_project $project_path
         puts "INFO: Project $project_path opened"
     }

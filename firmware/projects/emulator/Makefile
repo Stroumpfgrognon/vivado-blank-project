@@ -3,7 +3,9 @@ PROJECT_PATH := $(dir $(lastword $(MAKEFILE_LIST)))
 SCRIPTS_PATH := $(PROJECT_PATH)scripts/
 LIBRARY_PATH := $(PROJECT_PATH)libraries/
 
-VIVADO := vivado -mode batch -source
+VIVADO := vivado -notrace -nolog -nojournal -mode batch -source 
+
+VIVADO_SCRIPT := generate.tcl
 
 
 #include $(SCRIPTS_PATH)quiet.mk
@@ -85,8 +87,15 @@ clean:
 	$(call clean,$(CLEAN_TARGET), $(HL)$(PROJECT_NAME)$(NC) project)
 	-rm -Rf ${DIR_NAME}
 
-run: 
-	echo "running"
+
+project:
+	@$(VIVADO) $(CURDIR)/$(VIVADO_SCRIPT) -tclargs make_project
+
+test:
+	@$(VIVADO) $(CURDIR)/$(VIVADO_SCRIPT) -tclargs make_simulations
+
+impl: 
+	@$(VIVADO) $(CURDIR)/$(VIVADO_SCRIPT) -tclargs make_implementation
 
 all: 
-	@$(VIVADO) $(CURDIR)/emulator.tcl -notrace 
+	@$(VIVADO) $(CURDIR)/$(VIVADO_SCRIPT) -tclargs all
