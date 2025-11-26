@@ -1,0 +1,8 @@
+*.jou
+/*.log
+/*.jou
+*.tmp
+/*.str
+*.log
+*.zip
+.Xil/

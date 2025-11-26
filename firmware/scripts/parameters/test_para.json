@@ -1,0 +1,31 @@
+
+[
+    {
+        "name": "6b8b",
+        "source_names": [
+            "enc_6b8b"
+        ],
+        "testbench_names": [
+            "tb_enc_6b8b"
+        ]
+    },
+    {
+        "name": "8b10b",
+        "source_names": [
+            "enc_8b10b"
+        ],
+        "testbench_names": [
+            "lookup_8b10b",
+            "tb_enc_8b10b"
+        ]
+    },
+    {
+        "name": "endian_changer",
+        "source_names": [
+            "endian_half_changer"
+        ],
+        "testbench_names": [
+            "tb_endian_half_changer"
+        ]
+    }
+]
