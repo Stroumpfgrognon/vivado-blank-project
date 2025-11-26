@@ -88,14 +88,8 @@ proc do_simulations {} {
     puts "\n finished simulation\n"
 
     #simulation for project specific testbenches can be inserted here with
-    # run_simulation_project
-    #proc get_json {filename} {
-    #    set fp [open $filename r]
-    #    set file_data [read $fp]
-    #    close $fp
-    #    return [json::json2dict $file_data]
-    #}
-    #run_simulation_project [get_json "./parameters/test.json"]
+
+    run_simulation_project [get_json "./parameters/project_tests.json"]
 }
 
 proc do_implementation {} {

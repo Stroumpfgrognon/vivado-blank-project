@@ -56,6 +56,7 @@ proc run_simulation_library { } {
 # Top modules should have the same name as the files and be placed last in the list. Import order matters for dependencies.
 proc run_simulation_project {test_dict} {
     set_msg_config -id {[Common 17-259]} -limit 0
+
     foreach test $test_dict {
         set test_name [dict get $test name]
         if {[string first $test_name "PASS"] != -1} {
@@ -73,7 +74,7 @@ proc run_simulation_project {test_dict} {
         }
 
         foreach tb $testbench_names {
-            exec xvhdl -nolog "$./testbenches/$tb.vhd"
+            exec xvhdl -nolog "$./testbench/$tb.vhd"
         }
 
         # Elaborate and run simulation
