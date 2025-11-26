@@ -75,8 +75,11 @@ proc run_implementation {project_dict entries_dict} {
         launch_runs $runs_project_1 -to_step write_bitstream -jobs 8
         wait_on_runs [get_runs $runs_project_1]
         file copy -force $project_dir/$runs_project/$bitfile_name.bit $project_dir/output/$name.bit
-        file copy -force $project_dir/$runs_project/$bitfile_name.ltx $project_dir/output/$name.ltx
         write_cfgmem  -format mcs -size 1 -interface SPIx4 -loadbit "up 0x00000000 $project_dir/output/$name.bit" -force -file "$project_dir/output/$name.mcs"
+        if {[catch {file copy -force $project_dir/$runs_project/$bitfile_name.ltx $project_dir/output/$name.ltx} ]} {
+            puts "INFO : LTX file not generated for run $name"
+        }
+
     }
 }
 

@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
--- endian_half_changer.vhd
+-- one_library.vhd
 -- Module to swap bit order of a std_logic_vector
 --------------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity endian_half_changer is
+entity one_library is
     Generic (
         WIDTH   : integer := 16;    -- Width of the input/output vector (must be even)
         REVERSE : std_logic_vector(1 downto 0) := "11"  -- Bit 1: reverse upper half, Bit 0: reverse lower half
@@ -15,9 +15,9 @@ entity endian_half_changer is
         data_in  : in  std_logic_vector(WIDTH-1 downto 0);
         data_out : out std_logic_vector(WIDTH-1 downto 0)
     );
-end endian_half_changer;
+end one_library;
 
-architecture Behavioral of endian_half_changer is
+architecture Behavioral of one_library is
     constant HALF_WIDTH : integer := WIDTH / 2;
 begin
     -- Lower half (bits 0 to HALF_WIDTH-1)

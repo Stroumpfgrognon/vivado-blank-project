@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- tb_endian_half_changer.vhd
+-- tb_one_library.vhd
 -- Testbench for endian module with half-word reversal control
 --------------------------------------------------------------------------------
 
@@ -7,13 +7,13 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity tb_endian_half_changer is
-end tb_endian_half_changer;
+entity tb_one_library is
+end tb_one_library;
 
-architecture Behavioral of tb_endian_half_changer is
+architecture Behavioral of tb_one_library is
     
     -- Component declaration
-    component endian_half_changer
+    component one_library
         Generic (
             WIDTH   : integer := 16;
             REVERSE : std_logic_vector(1 downto 0) := "11"
@@ -81,19 +81,19 @@ end function to_hstring;
 begin
     
     -- DUT instances for each REVERSE configuration
-    DUT_00: endian_half_changer
+    DUT_00: one_library
         generic map (WIDTH => 16, REVERSE => "00")
         port map (data_in => data_in, data_out => data_out_00);
 
-    DUT_01: endian_half_changer
+    DUT_01: one_library
         generic map (WIDTH => 16, REVERSE => "01")
         port map (data_in => data_in, data_out => data_out_01);
 
-    DUT_10: endian_half_changer
+    DUT_10: one_library
         generic map (WIDTH => 16, REVERSE => "10")
         port map (data_in => data_in, data_out => data_out_10);
 
-    DUT_11: endian_half_changer
+    DUT_11: one_library
         generic map (WIDTH => 16, REVERSE => "11")
         port map (data_in => data_in, data_out => data_out_11);
     
@@ -240,6 +240,7 @@ begin
         
         report "=== All tests completed successfully. Check above messages for errors ===" severity note;
         wait;
+    std.env.stop;
     end process;
     
 end Behavioral;

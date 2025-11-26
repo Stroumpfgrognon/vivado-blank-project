@@ -1,0 +1,12 @@
+
+[
+    {
+        "name": "project_test",
+        "source_names": [
+            "your_project"
+        ],
+        "testbench_names": [
+            "tb_your_project"
+        ]
+    }
+]

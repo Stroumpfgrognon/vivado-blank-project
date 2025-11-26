@@ -1,0 +1,14 @@
+[
+    {
+         "name": "Your_project_configuration_0",
+        "parameters": "int_variable=41 other_int_variable=59",
+        "vector_parameters" : {
+            "BIT_REVERSE" : {
+                "size": 2,
+                "value": "11"
+            }
+
+        }
+
+    }
+]

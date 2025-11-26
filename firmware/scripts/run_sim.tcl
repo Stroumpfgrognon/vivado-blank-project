@@ -57,6 +57,8 @@ proc run_simulation_library { } {
 proc run_simulation_project {test_dict} {
     set_msg_config -id {[Common 17-259]} -limit 0
 
+    set script_dict [file dirname [info script]]
+
     foreach test $test_dict {
         set test_name [dict get $test name]
         if {[string first $test_name "PASS"] != -1} {
@@ -70,11 +72,11 @@ proc run_simulation_project {test_dict} {
         puts "INFO : Testing $test_name with sources $source_names and testbenches $testbench_names"
 
         foreach source_name $source_names {
-            exec xvhdl -nolog "./$source_name.vhd"
+            exec xvhdl -nolog "$script_dict/$source_name.vhd"
         }
 
         foreach tb $testbench_names {
-            exec xvhdl -nolog "$./testbench/$tb.vhd"
+            exec xvhdl -nolog "$script_dict/testbench/$tb.vhd"
         }
 
         # Elaborate and run simulation

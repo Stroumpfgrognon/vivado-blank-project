@@ -22,11 +22,6 @@ set mode 0
 
 source ${script_dir}/xilinx.tcl
 
-puts "The total number of arguments is $argc"
-if {$argc > 0} {puts "The arguments in ARGV are: $argv" }
-
-puts [lindex $argv 0]
-
 if {$argc > 0} {
     set proc_mode [lindex $argv 0]
 } else {
@@ -45,7 +40,7 @@ proc make_project {} {
     global mode
     global USE_INCR_COMP
 
-    firmware_create emulator $mode {} $device {}
+    firmware_create $project_name $mode {} $device {}
 
     file mkdir "$project_dir/$project_name/$project_name.srcs/sources_1"
     file mkdir "$project_dir/$project_name/$project_name.srcs/sim_1"
@@ -53,7 +48,7 @@ proc make_project {} {
 
     if {$mode == 0} {
         foreach file [glob -nocomplain -directory "$project_dir" *.vhd] {
-            file copy $file "$project_dir/$project_name/$project_name.srcs/sources_1"
+            # file copy $file "$project_dir/$project_name/$project_name.srcs/sources_1"
             add_files -norecurse -fileset sources_1 $file
         }
         foreach file [glob -nocomplain -directory "$project_dir/testbench/" *.vhd] {
