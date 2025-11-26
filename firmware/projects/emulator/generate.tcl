@@ -52,11 +52,19 @@ proc make_project {} {
     file mkdir "$project_dir/$project_name/$project_name.srcs/constrs_1"
 
     if {$mode == 0} {
-        file copy "$project_dir/$project_name.vhd" "$project_dir/$project_name/$project_name.srcs/sources_1"
-        foreach file [glob -nocomplain -directory "./testbench/" *.vhd] {
-            file copy $file "$project_dir/$project_name/$project_name.srcs/sim_1"
+        foreach file [glob -nocomplain -directory "$project_dir" *.vhd] {
+            file copy $file "$project_dir/$project_name/$project_name.srcs/sources_1"
+            add_files -norecurse -fileset sources_1 $file
         }
-        file copy "$const_dir/${project_name}_const.xdc"  "$project_dir/$project_name/$project_name.srcs/constrs_1"
+        foreach file [glob -nocomplain -directory "$project_dir/testbench/" *.vhd] {
+            # file copy $file "$project_dir/$project_name/$project_name.srcs/sim_1"
+            add_files -fileset sim_1 -norecurse -scan_for_includes $file
+        }
+        foreach file [glob -nocomplain -directory "$const_dir" *.xdc] {
+            file copy $file "$project_dir/$project_name/$project_name.srcs/constrs_1"
+            add_files -fileset constrs_1 -norecurse $file
+        }
+        # file copy "$const_dir/${project_name}_const.xdc"  "$project_dir/$project_name/$project_name.srcs/constrs_1"
     } else {
         write_hwdef -file "$project_dir/$project_name/$project_name.data/$project_name.hwdef"
     }

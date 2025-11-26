@@ -10,41 +10,5 @@
 
         }
 
-    },
-    {
-         "name": "altiroc_emulator_320Mb_16byte_endian10",
-        "parameters": "DATARATE=320 packetlength=16",
-        "vector_parameters" : {
-            "ENDIAN_CHANGER" : {
-                "size": 2,
-                "value": "10"
-            }
-
-        }
-
-    },
-    {
-         "name": "altiroc_emulator_320Mb_16byte_endian01",
-        "parameters": "DATARATE=320 packetlength=16",
-        "vector_parameters" : {
-            "ENDIAN_CHANGER" : {
-                "size": 2,
-                "value": "01"
-            }
-
-        }
-
-    },
-    {
-         "name": "altiroc_emulator_320Mb_16byte_endian00",
-        "parameters": "DATARATE=320 packetlength=16",
-        "vector_parameters" : {
-            "ENDIAN_CHANGER" : {
-                "size": 2,
-                "value": "00"
-            }
-
-        }
-
     }
 ]
