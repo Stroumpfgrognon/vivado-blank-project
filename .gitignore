@@ -6,3 +6,10 @@
 *.log
 *.zip
 .Xil/
+
+
+projects/*/*/*/
+projects/*/*/*.xpr
+projects/*/*.wdb
+projects/*/*.pb
+projects/*/xsim.dir/

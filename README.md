@@ -54,6 +54,8 @@ This will be useful here mainly for the get_json procedure to get procedure para
 
 In your project directory (Project/projects/your_project/) lies a Makefile giving aliases through which everything below can be called easily, automatically using the parameter files and directories indicated. The associated command will be indicated with each section with its alias
 
+There is also a `make clean` command to remove the vivado-generated files
+
 ## Initiating the project
 
 > make project 
@@ -196,10 +198,8 @@ The result files are put into the `Projects/your_project/your_project/output` di
 
 To use the project Makefile / generate.tcl script, you'll need to fill out the following files 
 
-`Projects/your_project/parameters/project_var.json` to create the project for the right device
-
-`Projects/your_project/parameters/project_tests.json` for the project test benches
-
-`Projects/scripts/parameters/test_para.json` for the libraries test benhces
-
-`Projects/your_project/parameters/run_para.json` for implementation parameters
+- `Projects/your_project/parameters/project_var.json` to create the project for the right device
+- `Projects/your_project/parameters/project_tests.json` for the project test benches
+- `Projects/scripts/parameters/test_para.json` for the libraries test benhces
+- `Projects/your_project/parameters/run_para.json` for implementation parameters
+- Change the CURRENT_PROJECT variable in the Makefile for the clean command to work properly
