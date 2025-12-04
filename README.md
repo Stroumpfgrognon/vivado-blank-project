@@ -1,6 +1,6 @@
-# KTH-CERN Vivado project suite
+# Vivado blank project
 
-A blank project for any Vivado project (hopefully) with :
+A blank project for any Vivado VHDL project (hopefully) with :
 
 - A clean file structure
 - A slew of modular scripts to limit the need for TCL coding knowledge.
@@ -203,3 +203,4 @@ To use the project Makefile / generate.tcl script, you'll need to fill out the f
 - `Projects/scripts/parameters/test_para.json` for the libraries test benhces
 - `Projects/your_project/parameters/run_para.json` for implementation parameters
 - Change the CURRENT_PROJECT variable in the Makefile for the clean command to work properly
+
