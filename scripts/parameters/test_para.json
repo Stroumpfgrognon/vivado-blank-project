@@ -3,10 +3,10 @@
     {
         "name": "one_library",
         "source_names": [
-            "one_library"
+            "one_library.vhd"
         ],
         "testbench_names": [
-            "tb_one_library"
+            "tb_one_library.vhd"
         ]
     }
 ]

@@ -91,11 +91,15 @@ proc firmware_create {project_name mode parameter_list device {board "not-applic
   puts "Project directory:  ${proc_dir} and system directory for it: $project_system_dir"
 
   ##default language VHDL
+
+  ## If target language is not VHDL, the line below can be commented out
   set_property target_language VHDL [current_project]
 
   set obj [current_project]
   set_property -name "default_lib" -value "work" -objects $obj
   set_property -name "enable_vhdl_2008" -value "1" -objects  $obj
+  ## end of VHDL-specific properties
+  
   set_property -name "ip_cache_permissions" -value "read write" -objects $obj
 
   if {$mode == 1} {
@@ -142,7 +146,7 @@ proc firmware_create {project_name mode parameter_list device {board "not-applic
 # [project_name] - name of the project
 # [project_dir] - directory to the project
 
-proc firmware_files {project_name project_dir} {
+proc firmware_files {project_name project_dir device} {
 
   set script_dir [file normalize [file join [file dirname [info script]] ../../scripts/]]
 
@@ -151,7 +155,17 @@ proc firmware_files {project_name project_dir} {
     add_files -fileset sim_1 -norecurse -scan_for_includes $file
   }
 
+  foreach file [glob -nocomplain -directory "${script_dir}/../test_libraries/" *.sv] {
+    # file copy $file "${project_dir}sim_1"
+    add_files -fileset sim_1 -norecurse -scan_for_includes $file
+  }
+
   foreach file [glob -nocomplain -directory "${script_dir}/../libraries/" *.vhd] {
+    # file copy $file "${project_dir}sources_1"
+    add_files -norecurse -fileset sources_1 $file
+  }
+
+  foreach file [glob -nocomplain -directory "${script_dir}/../libraries/" *.sv] {
     # file copy $file "${project_dir}sources_1"
     add_files -norecurse -fileset sources_1 $file
   }
@@ -166,7 +180,6 @@ proc firmware_files {project_name project_dir} {
     add_files -norecurse -fileset sim_1 $file
     set f [file normalize $file]
     set file_obj [get_files -of_objects [get_filesets sim_1] [list "*$f"]]
-    set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
     set_property -name "library" -value "work" -objects $file_obj
 
   }
@@ -200,7 +213,7 @@ proc firmware_files {project_name project_dir} {
 
   # setting properties
   set_property -name target_constrs_file -value $xdc_file -objects $obj
-  set_property -name target_part -value "xc7s15cpga196-2" -objects $obj
+  set_property -name target_part -value $device -objects $obj
   set_property -name target_ucf -value $xdc_file -objects $obj
 
 
@@ -209,6 +222,13 @@ proc firmware_files {project_name project_dir} {
     set f [file normalize $file]
     set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$f"]]
     set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+    set_property -name "library" -value "work" -objects $file_obj
+  }
+
+  foreach file [glob -nocomplain -directory "${project_dir}sources_1" *.sv] {
+    add_files -norecurse -fileset sources_1 $file
+    set f [file normalize $file]
+    set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$f"]]
     set_property -name "library" -value "work" -objects $file_obj
   }
 
@@ -228,7 +248,6 @@ proc firmware_files {project_name project_dir} {
 
   set_property top $project_name [current_fileset]
 }
-
 
 ##creating bd design
 #[project_name] - name of the project

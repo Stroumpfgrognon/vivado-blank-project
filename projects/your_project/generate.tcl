@@ -70,7 +70,7 @@ proc make_project {} {
         }
     }
 
-    firmware_files $project_name "$project_dir/$project_name/$project_name.srcs/"
+    firmware_files $project_name "$project_dir/$project_name/$project_name.srcs/" $device
     puts "included all source files and integrated ip blocks"
 }
 

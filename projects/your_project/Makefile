@@ -9,10 +9,13 @@ VIVADO_SCRIPT := generate.tcl
 project:
 	@$(VIVADO) $(CURDIR)/$(VIVADO_SCRIPT) -tclargs make_project
 
-test:
+$(CURRENT_PROJECT)/$(CURRENT_PROJECT).xpr:
+	@$(VIVADO) $(CURDIR)/$(VIVADO_SCRIPT) -tclargs make_project
+
+simu:
 	@$(VIVADO) $(CURDIR)/$(VIVADO_SCRIPT) -tclargs make_simulations
 
-impl: 
+impl: $(CURRENT_PROJECT)/$(CURRENT_PROJECT).xpr
 	@$(VIVADO) $(CURDIR)/$(VIVADO_SCRIPT) -tclargs make_implementation
 
 all: 
