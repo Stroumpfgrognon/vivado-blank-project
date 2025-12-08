@@ -3,10 +3,10 @@
     {
         "name": "project_test",
         "source_names": [
-            "your_project"
+            "your_project.vhd"
         ],
         "testbench_names": [
-            "tb_your_project"
+            "tb_your_project.vhd"
         ]
     }
 ]

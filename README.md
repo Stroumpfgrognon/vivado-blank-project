@@ -85,7 +85,7 @@ Structure for project_dict :
 
 ## Running tests
 
-> make test
+> make simu
 
 or
 
@@ -194,6 +194,12 @@ The result files are put into the `Projects/your_project/your_project/output` di
 
 > If a run contains "PASS" in its name, it is skipped
 
+## Changing the parameters for projects
+
+The generated parameters for the project are being called in the `Projects/scripts/xilinx.tcl` file, specifically from lines 95-101 for parameters for all the projects of this repo. 
+
+If you want to have project-specific parameters, you may add them in `your_project/generate.tcl` on line 72 and below, as long as you remain in the same block.
+
 ## TL;DR for where to set parameters
 
 To use the project Makefile / generate.tcl script, you'll need to fill out the following files 
@@ -202,5 +208,13 @@ To use the project Makefile / generate.tcl script, you'll need to fill out the f
 - `Projects/your_project/parameters/project_tests.json` for the project test benches
 - `Projects/scripts/parameters/test_para.json` for the libraries test benhces
 - `Projects/your_project/parameters/run_para.json` for implementation parameters
-- Change the CURRENT_PROJECT variable in the Makefile for the clean command to work properly
+- Change the `CURRENT_PROJECT` variable in the Makefile for the clean command to work properly as well as the requirement for impl
+- `Projects/scripts/xilinx.tcl` or `your_project/generate.tcl` for global/local project settings (optional)
 
+## VHDL only ? What about Verilog/SystemVerilog ?
+
+This project was made for a school project and hasn't been tested thoroughly with something else than VHDL.
+
+The scripts are made to be able to import Verilog/SystemVerilog files as well and also test them properly (but is untested). You can modify `Projects/scripts/xilinx.tcl` and edit or comment out line 96 to change the target general language of every project of the repository, or change the language in `generate.tcl` for mixed languages projects.
+
+Any pull requests or help is welcome to improve this aspect of the project or any other :)
